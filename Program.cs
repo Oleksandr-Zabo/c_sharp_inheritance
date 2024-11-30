@@ -1,4 +1,6 @@
-﻿namespace c_sharp_inheritance
+﻿using System.ComponentModel;
+
+namespace c_sharp_inheritance
 {//lab ex-1
     public abstract class AppConsts
     {
@@ -6,6 +8,7 @@
         public const string DefaultSurname = "No Surname";
         public const int DefaultAge = -1;
         public const string DefaultWork = "No Work";
+        public const int DefaultWorkExperiance = -1;
     }
 
     public class Human
@@ -68,48 +71,87 @@
 
     public class Builder: Human
     {
-        public Builder(): base()
+        private int? _work_experiance;
+        public int WorkExperiance
+        {
+            get => _work_experiance ?? AppConsts.DefaultWorkExperiance;
+            set => _work_experiance = value;
+        }
+
+        public Builder() : base()
         {
             Work = "Builder";
+            _work_experiance = null;
         }
 
         public Builder(string? name, string? surname, int? age) : base(name, surname, age, "Builder")
         {
+            WorkExperiance = 0;
+        }
+
+        public Builder(string? name, string? surname, int? age, int? work_experiance) : base(name, surname, age, "Builder")
+        {
+            _work_experiance = work_experiance;
         }
 
         public override string GetInfo()
         {
-            return $"{base.GetInfo()}";
+            return $"{base.GetInfo()}, Work Experiance: {WorkExperiance}";
         }
+
     }
 
     public class Sailor : Human
     {
+        private int? _work_experiance;
+        public int WorkExperiance
+        {
+            get => _work_experiance ?? AppConsts.DefaultWorkExperiance;
+            set => _work_experiance = value;
+        }
         public Sailor() : base()
         {
             Work = "Sailor";
+            _work_experiance = null;
         }
         public Sailor(string? name, string? surname, int? age) : base(name, surname, age, "Sailor")
         {
+            WorkExperiance = 0;
+        }
+        public Sailor(string? name, string? surname, int? age, int? work_experiance) : base(name, surname, age, "Sailor")
+        {
+            _work_experiance = work_experiance;
         }
         public override string GetInfo()
         {
-            return $"{base.GetInfo()}";
+            return $"{base.GetInfo()}, Work Experiance: {WorkExperiance}";
         }
     }
 
     public class Pilot : Human
     {
+        private int? _work_experiance;
+        public int WorkExperiance
+        {
+            get => _work_experiance ?? AppConsts.DefaultWorkExperiance;
+            set => _work_experiance = value;
+        }
         public Pilot() : base()
         {
             Work = "Pilot";
+            _work_experiance = null;
         }
         public Pilot(string? name, string? surname, int? age) : base(name, surname, age, "Pilot")
         {
+            WorkExperiance = 0;
+        }
+        public Pilot(string? name, string? surname, int? age, int? work_experiance) : base(name, surname, age, "Pilot")
+        {
+            _work_experiance = work_experiance;
         }
         public override string GetInfo()
         {
-            return $"{base.GetInfo()}";
+            return $"{base.GetInfo()}, Work Experiance: {WorkExperiance}";
         }
     }
 
@@ -120,15 +162,15 @@
             Human human = new Human();
             Console.WriteLine(human);
 
-            Human builder = new Builder("John", "Doe", 25);
+            Human builder = new Builder("John", "Doe", 25, 5);
             Console.WriteLine(builder.GetInfo());
 
             Human sailor = new Sailor("Jack", "Sparrow", 35);
             Console.WriteLine(sailor.GetInfo());
 
-            Human pilot = new Pilot("John", "Doe", 45);
+            Human pilot = new Pilot("John", "Doe", 45, 8);
 
-            Console.WriteLine(pilot);
+            Console.WriteLine(pilot.GetInfo());
 
         }
     }
